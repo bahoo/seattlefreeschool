@@ -1,0 +1,50 @@
+header{
+   position: relative;
+}
+
+header nav{
+  margin-bottom: 1em;
+}
+
+header nav a{
+  margin-right: 1em;
+}
+
+.sfs-logo{
+
+}
+
+.sfs-logo img{
+   margin-right: 20px;
+   width: 80px;
+}
+
+a:link, a:visited, a:hover, a:active{
+
+}
+
+
+.auth{
+   position: absolute;
+   right: 0;
+   top: 0;
+   text-decoration: none !important;
+}
+
+.auth img{
+   margin-right: 1em;
+}
+
+.messages{
+   list-style: none;
+   padding: 0;
+}
+
+.avatar{
+   border-radius: 50%;
+}
+
+.sidebar{
+   float: right;
+   width: 200px;
+}

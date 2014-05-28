@@ -1,0 +1,1 @@
+&copy; Seattle Free School
