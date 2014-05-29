@@ -49,9 +49,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'seattlefreeschool',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => $_SERVER['SFS_DB_NAME'],
+			'username'  => $_SERVER['SFS_DB_USERNAME'],
+			'password'  => $_SERVER['SFS_DB_PASSWORD'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
