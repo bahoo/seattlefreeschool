@@ -45,18 +45,37 @@ class ClassController extends BaseController {
    }
 
    public function attend($slug, $id){
+
       $event = ClassEvent::find($id);
+      $user = Auth::user();
+
       if(Input::get('unrsvp')):
-         $event->attendees()->detach(Auth::user());
+         $event->attendees()->detach($user);
          Alert::info('OK you are no longer attending this class. No biggie if you change your mind, just click Join This Class!')->flash();
       else:
-         if($event->attendees->contains(Auth::user()->id)):
+         if($event->attendees->contains($user->id)):
             Alert::warning('You\'re already attending that class, you big silly goof!')->flash();
          else:
-            $event->attendees()->attach(Auth::user());
+            $event->attendees()->attach($user);
             Alert::success('Sweet! You\'ve been added. Look out for a calendar invite in your inbox, see you then!')->flash();
          endif;
       endif;
+
+      // send email.
+      // Mail::pretend();
+      $vCalendar = $event->getVCalendar();
+      $user = Auth::user();
+
+      $data = array('event' => $event, 'user' => Auth::user(), 'vCalendar' => $vCalendar);
+
+      Mail::send('emails.classes.invite', $data, function($message) use ($user, $event, $vCalendar)
+      {
+          $message->from('jon.c.culver@gmail.com', 'Jon Culver');
+          $message->to('jon.c.culver@gmail.com', 'Jon Culver');
+          $message->attachData($vCalendar->render(), 'invite.ics', array('mime' => 'text/calendar'));
+          $message->addPart($vCalendar->render(), 'text/calendar');
+      });
+
       return Redirect::to($event->permalink());
    }
 

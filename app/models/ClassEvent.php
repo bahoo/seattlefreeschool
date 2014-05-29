@@ -51,7 +51,8 @@ class ClassEvent extends Eloquent{
       return implode(', ', $facilitators);
    }
 
-   public function dateDescriptive(){
+   public function dateDescriptive()
+   {
 
       $today = Carbon::today();
 
@@ -86,6 +87,25 @@ class ClassEvent extends Eloquent{
 
       return $text;
 
+   }
+
+   public function getVCalendar()
+   {
+      $vCalendar = new \Eluceo\iCal\Component\Calendar('www.seattlefreeschool.org');
+      $vEvent = new \Eluceo\iCal\Component\Event();
+      $vEvent->setDtStart(new \DateTime('2014-05-31 12:00:00 PM'))
+               ->setDtEnd(new \DateTime('2014-05-31 1:00:00 PM'))
+               ->setSummary($this->topic->title)
+               ->setAttendee('jon.c.culver@gmail.com')
+               ->setOrganizer('seattlefreeschool@gmail.com');
+      $vCalendar->addEvent($vEvent);
+
+      // might need these.
+      // header('Content-Type: text/calendar; charset=utf-8');
+      // header('Content-Disposition: attachment; filename="cal.ics"');
+      // echo $vCalendar->render();
+
+      return $vCalendar;
    }
 
 }

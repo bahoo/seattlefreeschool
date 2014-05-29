@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"cviebrock/eloquent-sluggable": "2.*",
-		"prologue/alerts": "dev-master"
+		"prologue/alerts": "dev-master",
+		"eluceo/ical": "*"
 	},
 	"autoload": {
 		"classmap": [

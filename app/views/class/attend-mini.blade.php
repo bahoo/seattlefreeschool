@@ -15,6 +15,8 @@
 @else
   {{ Form::open(array('route' => 'login'))}}
     {{ Form::hidden('attend_event_id', $event->id) }}
+    <h4>Want to attend?</h4>
+    <p>All of our classes are totally free and open to everyone!</p>
     <div class="form-group">
       {{ Form::label('email', 'Email Address') }}
       {{ Form::email('email', null, array('class' => 'form-control')) }}

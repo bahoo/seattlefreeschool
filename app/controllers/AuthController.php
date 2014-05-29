@@ -23,6 +23,8 @@ class AuthController extends Controller {
 		if(Input::get('login')){
 
 			if(Auth::attempt($credentials, true)){
+				// todo: future CTA opportunity.
+				Alert::success('Welcome back, ' . Auth::user()->name . '!')->flash();
 				return Redirect::intended('/');
 			}
 
