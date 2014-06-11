@@ -121,7 +121,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
 		'Prologue\Alerts\AlertsServiceProvider',
-		// 'Authority\AuthorityL4\AuthorityL4ServiceProvider'
+		'Authority\AuthorityL4\AuthorityL4ServiceProvider'
 	),
 
 	/*
@@ -154,7 +154,7 @@ return array(
 		'Alert'           => 'Prologue\Alerts\Facades\Alert',
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',
 		'Auth'            => 'Illuminate\Support\Facades\Auth',
-		// 'Authority'       => 'Authority\AuthorityL4\Facades\Authority',
+		'Authority'       => 'Authority\AuthorityL4\Facades\Authority',
 		'Blade'           => 'Illuminate\Support\Facades\Blade',
 		'Cache'           => 'Illuminate\Support\Facades\Cache',
 		'ClassLoader'     => 'Illuminate\Support\ClassLoader',

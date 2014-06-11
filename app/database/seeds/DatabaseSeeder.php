@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('TopicsSeeder');
 		$this->call('LocationsSeeder');
 		$this->call('ClassEventsSeeder');
+		$this->call('RoleTableSeeder');
 	}
 
 }

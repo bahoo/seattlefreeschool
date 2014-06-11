@@ -110,4 +110,22 @@ class ClassEvent extends Eloquent{
       return $vCalendar;
    }
 
+   public function sendVCalendarInvite(){
+      // none of this works for me. what does it mean?
+      // maybe try with beta testers, see if the invites appear for them?
+
+      $vCalendar = $event->getVCalendar();
+      $user = Auth::user();
+
+      $data = array('event' => $event, 'user' => Auth::user(), 'vCalendar' => $vCalendar);
+
+      Mail::send('emails.classes.invite', $data, function($message) use ($user, $event, $vCalendar)
+      {
+          $message->from('jon.c.culver@gmail.com', 'Jon Culver');
+          $message->to('culvejc+test@gmail.com');
+          $message->attachData($vCalendar->render(), 'invite.ics', array('mime' => 'text/calendar'));
+          $message->addPart($vCalendar->render(), 'text/calendar');
+      });
+   }
+
 }

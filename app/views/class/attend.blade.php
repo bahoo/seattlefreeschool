@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-   <a href="{{ route('classes.create') }}" class="btn btn-success pull-right">Add a New Class</a>
+
+   @if(Authority::can('create', 'ClassEvent'))
+      <a href="{{ route('classes.create') }}" class="btn btn-success pull-right">Add a New Class</a>
+   @endif
 
    <h3>Showing @if($is_events_filtered)<b>{{ $filtered_topic }}</b>@else all @endif events in the next 90 days:
          @if($is_events_filtered)<small><a href="{{ route('classes.index') }}">Show all events instead</a></small>@endif

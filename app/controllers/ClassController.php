@@ -5,6 +5,12 @@ use Carbon\Carbon;
 class ClassController extends BaseController {
 
    public function getCreate($slug = false){
+
+      if(Authority::cannot('create', 'ClassEvent')){
+         Alert::danger('You don not have permission to create a new class.')->flash();
+         return Redirect::route('classes.index');
+      }
+
       $topics = Topic::all()->lists('title', 'id');
       $venues = Location::all()->lists('title', 'id');
       $next_week = Carbon::now()->addWeek();
@@ -16,6 +22,11 @@ class ClassController extends BaseController {
    }
 
    public function postCreate(){
+
+      if(Authority::cannot('create', 'ClassEvent')){
+         Alert::danger('You don not have permission to create a new class.')->flash();
+         return Redirect::route('classes.index');
+      }
 
       $event = new ClassEvent();
 
@@ -62,7 +73,14 @@ class ClassController extends BaseController {
    }
 
    public function edit($slug, $id){
+
       $event = ClassEvent::find($id);
+
+      if(Authority::cannot('manage', $event)){
+         Alert::danger('You don not have permission to edit a class.')->flash();
+         return Redirect::route('classes.index');
+      }
+
       $venues = Location::all()->lists('title', 'id');
       $event->start = new Carbon($event->start);
       return View::make('class.edit', array('event' => $event, 'venues' => $venues));
@@ -71,6 +89,11 @@ class ClassController extends BaseController {
    public function update($slug, $id){
 
       $event = ClassEvent::find($id);
+
+      if(Authority::cannot('manage', $event)){
+         Alert::danger('You don not have permission to edit a class.')->flash();
+         return Redirect::route('classes.index');
+      }
 
       $topic_fields = Input::get('topic');
       unset($topic_fields['save']);
@@ -147,33 +170,24 @@ class ClassController extends BaseController {
       $event = ClassEvent::find($id);
       $user = Auth::user();
 
+      if(Authority::cannot('attend', $event)):
+         if($event->facilitators->contains($user->id)):
+            Alert::warning('You are hosting the class, you big silly goof!')->flash();
+            return Redirect::to($event->permalink());
+         else:
+            Alert::warning('You must be logged in to attend a class. Create a free account now!');
+            return Redirect::to($event->permalink());
+         endif;
+      endif;
+
       if(Input::get('unrsvp')):
          $event->attendees()->detach($user);
          Alert::info('OK you are no longer attending this class. No biggie if you change your mind, just click Join This Class!')->flash();
       else:
-         if($event->attendees->contains($user->id)):
-            Alert::warning('You\'re already attending that class, you big silly goof!')->flash();
-         else:
-            $event->attendees()->attach($user);
-            Alert::success('Sweet! You\'ve been added. Look out for a calendar invite in your inbox, see you then!')->flash();
-         endif;
+         $event->attendees()->attach($user);
+         Alert::success('Sweet! You\'ve been added. Look out for a calendar invite in your inbox, see you then!')->flash();
+         // todo: send calendar invite.
       endif;
-
-      // none of this works for me. what does it mean?
-      // maybe try with beta testers, see if the invites appear for them?
-
-      $vCalendar = $event->getVCalendar();
-      $user = Auth::user();
-
-      $data = array('event' => $event, 'user' => Auth::user(), 'vCalendar' => $vCalendar);
-
-      Mail::send('emails.classes.invite', $data, function($message) use ($user, $event, $vCalendar)
-      {
-          $message->from('jon.c.culver@gmail.com', 'Jon Culver');
-          $message->to('culvejc+test@gmail.com');
-          $message->attachData($vCalendar->render(), 'invite.ics', array('mime' => 'text/calendar'));
-          $message->addPart($vCalendar->render(), 'text/calendar');
-      });
 
       return Redirect::to($event->permalink());
    }
