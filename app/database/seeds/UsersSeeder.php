@@ -10,8 +10,8 @@ class UsersSeeder extends Seeder {
 	public function run()
 	{
 		DB::table('users')->delete();
-		User::create(array('email' => 'culvejc@gmail.com', 'name' => 'Jon Culver', 'password' => Hash::make('seattlefreeschool123')));
-		User::create(array('email' => 'test_user@gmail.com', 'name' => 'Test User', 'password' => Hash::make('seattlefreeschool123')));
+		User::create(array('email' => 'culvejc@gmail.com', 'name' => 'Jon Culver', 'password' => 'seattlefreeschool123'));
+		User::create(array('email' => 'test_user@gmail.com', 'name' => 'Test User', 'password' => 'seattlefreeschool123'));
 	}
 
 }

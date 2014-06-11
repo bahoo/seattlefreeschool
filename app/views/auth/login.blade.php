@@ -13,7 +13,7 @@
          {{ Form::password('password', array('class' => 'form-control')) }}
       </div>
 
-      {{ Form::submit('Login', array('class' => 'btn btn-default')) }}
+      {{ Form::submit('Login', array('name' => 'login', 'class' => 'btn btn-default')) }}
 
    {{ Form::close() }}
 @stop

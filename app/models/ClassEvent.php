@@ -5,6 +5,7 @@ use Carbon\Carbon;
 class ClassEvent extends Eloquent{
 
    protected $table = 'events';
+   protected $guarded = array();
 
    # relationships
 
@@ -92,11 +93,12 @@ class ClassEvent extends Eloquent{
    public function getVCalendar()
    {
       $vCalendar = new \Eluceo\iCal\Component\Calendar('www.seattlefreeschool.org');
+      $vCalendar->setMethod('REQUEST');
       $vEvent = new \Eluceo\iCal\Component\Event();
       $vEvent->setDtStart(new \DateTime('2014-05-31 12:00:00 PM'))
                ->setDtEnd(new \DateTime('2014-05-31 1:00:00 PM'))
                ->setSummary($this->topic->title)
-               ->setAttendee('jon.c.culver@gmail.com')
+               ->setAttendee('culvejc+test@gmail.com')
                ->setOrganizer('seattlefreeschool@gmail.com');
       $vCalendar->addEvent($vEvent);
 

@@ -22,11 +22,11 @@
             {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) }}
          </div>
 
-         {{ Form::submit('Login', array('name' => 'login', 'class' => 'btn btn-default')) }}
+         {{ Form::submit('Login', array('name' => 'login', 'class' => 'btn btn-primary')) }}
 
          <span class="or">or</span>
 
-         {{ Form::submit('Sign Up', array('name' => 'signup', 'class' => 'btn btn-secondary')) }}
+         {{ Form::submit('Sign Up', array('name' => 'signup', 'class' => 'btn btn-success')) }}
 
       {{ Form::close() }}
    @endif

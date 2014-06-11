@@ -20,16 +20,16 @@ class AuthController extends Controller {
 		// $rules = array('email' => 'unique:users,email');
 		// $validator = Validator::make($input, $rules);
 
-		if(Input::get('login')){
+		if(!Input::get('signup')){
 
 			if(Auth::attempt($credentials, true)){
 				// todo: future CTA opportunity.
 				Alert::success('Welcome back, ' . Auth::user()->name . '!')->flash();
 				return Redirect::intended('/');
+			} else {
+				Alert::warning("Couldn't log you in. Bad email / password combo.");
+				return View::make('auth.login');
 			}
-
-			Alert::warning("Couldn't log you in. Bad email / password combo.");
-			return View::make('auth.login');
 
 		} elseif(Input::get('signup')){
 

@@ -22,7 +22,8 @@ Route::group(array(), function(){
    Route::post('/logout', array('as' => 'logout.post', 'uses' => 'AuthController@postLogout'));
 });
 
-Route::group(array('before' => 'auth.basic'), function()
+// Route::group(array('before' => 'auth.basic'), function()
+Route::group(array(), function()
 {
 
    Route::get('/', array('as' => 'index', 'uses' => 'IndexController@index'));
@@ -35,15 +36,19 @@ Route::group(array('before' => 'auth.basic'), function()
    });
 
    Route::group(array('prefix' => 'classes'), function(){
+      Route::get('/new', array('as' => 'classes.create', 'uses' => 'ClassController@getCreate'));
+      Route::post('/new', array('as' => 'classes.create.post', 'uses' => 'ClassController@postCreate'));
       Route::get('/host', array('as' => 'classes.host', 'uses' => 'ClassController@host'));
       Route::get('/{slug?}', array('as' => 'classes.index', 'uses' => 'ClassController@index'));
       Route::get('/{slug}/{id}', array('as' => 'classes.view', 'uses' => 'ClassController@view'));
+      Route::get('/{slug}/{id}/edit', array('as' => 'classes.edit', 'uses' => 'ClassController@edit'));
       Route::post('/{slug}/{id}/update', array('as' => 'classes.update', 'uses' => 'ClassController@update'));
       Route::post('/{slug}/{id}/attend', array('as' => 'classes.attend', 'uses' => 'ClassController@attend'));
    });
 
    Route::group(array('prefix' => 'community'), function(){
       Route::get('/', array('as' => 'community', 'uses' => 'CommunityController@index'));
+      Route::get('/{slug}', array('as' => 'community.page', 'uses' => 'CommunityController@page'));
       Route::get('/users', array('as' => 'community.users', 'uses' => 'CommunityController@users'));
       Route::get('/users/{id}', array('as' => 'community.user', 'uses' => 'CommunityController@user'));
       Route::post('/users/{id}/update', array('as' => 'community.user.update.post', 'uses' => 'CommunityController@postUpdate'));

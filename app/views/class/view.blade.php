@@ -10,9 +10,9 @@
     @endif
   </div>
 
-  <h1>{{ $event->topic->title }}</h1>
+  <h1>{{ $event->title }}</h1>
   <p class="host-and-attendees">Led by {{ $event->facilitatorsInline() }} &bull; {{ $event->attendees->count() }} attendees</p>
-  {{ $event->topic->description }}
+  {{ $event->description }}
 
   <p><b>@if($event->isPast())This class took place @endif {{ $event->dateDescriptive() }}</b></p>
 
@@ -29,7 +29,7 @@
 
     <div class="list-group">
       @foreach($event->facilitators as $facilitator)
-        <a href="{{ $facilitator->name }}" class="list-group-item media">
+        <a href="{{ $facilitator->permalink() }}" class="list-group-item media">
           <div class="pull-left">
             <img src="{{ $facilitator->avatar() }}" class="media-object avatar" />
           </div>

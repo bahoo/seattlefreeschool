@@ -25,4 +25,9 @@ class CommunityController extends BaseController {
       return View::make('community.user', array('user' => $user));
    }
 
+   public function page($slug)
+   {
+      return View::make('community.' . $slug);
+   }
+
 }

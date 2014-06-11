@@ -7,6 +7,8 @@ class Topic extends Eloquent implements SluggableInterface{
 
     use SluggableTrait;
 
+    protected $guarded = array();
+
     protected $sluggable = array(
         'build_from' => 'title',
         'save_to'    => 'slug',

@@ -48,3 +48,10 @@ a:link, a:visited, a:hover, a:active{
    float: right;
    width: 200px;
 }
+
+.footer{
+  margin-top: 5em;
+  background: #316a96;
+  padding: 2em 0;
+  color: #aaa;
+}

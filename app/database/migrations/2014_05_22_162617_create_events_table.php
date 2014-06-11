@@ -22,8 +22,8 @@ class CreateEventsTable extends Migration {
 			$table->dateTime('end')->nullable();
 			$table->boolean('is_all_day');
 			$table->timestamps();
-			$table->foreign('topic_id')->references('topics')->on('id')->onDelete('cascade');
-			$table->foreign('location_id')->references('locations')->on('id')->onDelete('cascade');
+			$table->foreign('topic_id')->references('topics')->on('id');
+			$table->foreign('location_id')->references('locations')->on('id');
 		});
 
 		Schema::create('event_users', function(Blueprint $table)
@@ -34,8 +34,8 @@ class CreateEventsTable extends Migration {
 			$table->enum('type', array('facilitator', 'attendee'))->default('attendee');
 			$table->timestamps();
 			$table->unique(array('user_id', 'event_id'));
-			$table->foreign('user_id')->references('users')->on('id')->onDelete('cascade');
-			$table->foreign('event_id')->references('events')->on('id')->onDelete('cascade');
+			$table->foreign('user_id')->references('users')->on('id');
+			$table->foreign('event_id')->references('events')->on('id');
 		});
 	}
 

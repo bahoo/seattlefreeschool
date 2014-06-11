@@ -1,12 +1,11 @@
-   {{ Form::model($event, array('route' => 'classes.update', 'id' => $event->id)) }}
+@extends('layouts.master')
 
-      {{ Form::label('start', 'Start Time') }}
-      {{ Form::text('start') }}
+@section('content')
 
-      {{ Form::label('end', 'End Time') }}
-      {{ Form::text('end') }}
+   {{ Form::model($event, array('route' => array('classes.update', $event->topic->slug, $event->id))) }}
 
-      {{ Form::label('location', 'Location') }}
-      {{ Form::select('location') }}
+      @include('class.form')
 
    {{ Form::close() }}
+
+@stop

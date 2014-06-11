@@ -15,12 +15,16 @@ class ClassEventsSeeder extends Seeder {
 		DB::table('event_users')->delete();
 		$nextWeek = Carbon::now()->addWeek();
 
-		ClassEvent::create(array('topic_id' => Topic::first()->id,
-						'location_id' => Location::first()->id,
+		$topic = Topic::first();
+		$location = Location::first();
+
+		$event = ClassEvent::create(array('topic_id' => $topic->id,
+						'location_id' => $location->id,
+						'title' => $topic->title,
+						'summary' => $topic->summary,
+						'description' => $topic->description,
 						'start' => $nextWeek->toDateTimeString(),
 						'end' => $nextWeek->addHours(3)->toDateTimeString()));
-
-		$event = ClassEvent::firstOrFail();
 
 		$jon = User::where('email', 'culvejc@gmail.com')->firstOrFail();
 		$test = User::where('email', 'test_user@gmail.com')->firstOrFail();
