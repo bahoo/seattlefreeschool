@@ -16,7 +16,7 @@ class MoveClassDetailsToEvent extends Migration {
 		{
 			$table->string('title', 255)->default('')->after('id');
 			$table->string('summary', 100)->default('')->after('title');
-			$table->text('description')->default('')->after('slug');
+			$table->text('description')->default('')->after('summary');
 		});
 
 		foreach(ClassEvent::with('topic')->get() as $event){
