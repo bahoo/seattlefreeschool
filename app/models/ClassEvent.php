@@ -19,7 +19,7 @@ class ClassEvent extends Eloquent{
 
    public function users()
    {
-      return $this->belongsToMany('user', 'event_users', 'event_id', 'user_id');
+      return $this->belongsToMany('User', 'event_users', 'event_id', 'user_id');
    }
 
    public function topic()
