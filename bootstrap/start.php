@@ -27,6 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local' => array('sherman', 'sherman.local'),
+   'production' => array('web219.webfaction.com')
 
 ));
 
