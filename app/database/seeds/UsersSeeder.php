@@ -11,7 +11,7 @@ class UsersSeeder extends Seeder {
 	{
 		DB::table('users')->delete();
 		User::create(array('email' => 'culvejc@gmail.com', 'name' => 'Jon Culver', 'password' => 'seattlefreeschool123'));
-		User::create(array('email' => 'test_user@gmail.com', 'name' => 'Test User', 'password' => 'seattlefreeschool123'));
+		User::create(array('email' => 'julian@schrenzel.net', 'name' => 'Julian Schrenzel', 'password' => 'seattlefreeschool123'));
 	}
 
 }
